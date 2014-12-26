@@ -6,8 +6,13 @@ package com.harmeetsingh13.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import play.mvc.Controller;
 import play.mvc.Result;
+import views.html.user.all_users;
 
 import com.harmeetsingh13.entities.User;
 import com.harmeetsingh13.service.UserService;
