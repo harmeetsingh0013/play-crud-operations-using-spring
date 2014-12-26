@@ -3,6 +3,7 @@
  */
 package com.harmeetsingh13.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.harmeetsingh13.entities.User;
@@ -14,4 +15,5 @@ import com.harmeetsingh13.entities.User;
 public interface UserService {
 
 	public Optional<User> findUserById(int id);
+	public List<User> getAllUsers();
 }

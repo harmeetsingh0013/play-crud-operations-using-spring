@@ -2,11 +2,12 @@ package controllers;
 
 import java.util.Optional;
 
+import org.springframework.stereotype.Component;
+
 import com.harmeetsingh13.entities.User;
 
 import play.mvc.Controller;
 import play.mvc.Result;
-
 
 public class Application extends Controller {
 

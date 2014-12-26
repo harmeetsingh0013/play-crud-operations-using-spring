@@ -1,7 +1,10 @@
 /**
  * 
  */
-package com.harmeetsingh13.config;
+
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -12,18 +15,25 @@ import play.GlobalSettings;
  * @author Harmeet Singh(Taara)
  *
  */
-public class GlobalConfiguration /*extends GlobalSettings*/{
+public class Global extends GlobalSettings{
 
-	/*private AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
+	private Logger logger = null;	
+	private final AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
 	
-	@Override
+	public Global() {
+		logger = Logger.getLogger("GlobalConfiguration");
+		logger.setLevel(Level.ALL);
+	}
+	
+	@Override 
 	public void onStart(Application app) {
 		super.onStart(app);
 		
 		// AnnotationConfigApplicationContext can only be refreshed once, but we do it here even though this method
 		// can be called multiple times. The reason for doing during startup is so that the Play configuration is
 		// entirely available to this application context.
-		applicationContext.scan("com.harmeetsingh13");
+		logger.info("ON START");
+		applicationContext.scan("com.harmeetsingh13.controllers", "com.harmeetsingh13.service.impl", "com.harmeetsingh13.dao.impl");
 		applicationContext.refresh();
 		
 		// This will construct the beans and call any construction lifecycle methods e.g. @PostConstruct
@@ -40,6 +50,7 @@ public class GlobalConfiguration /*extends GlobalSettings*/{
 	
 	@Override
 	public <A> A getControllerInstance(Class<A> clazz) throws Exception {
+		logger.info("getControllerInstance");
 		return applicationContext.getBean(clazz);
-	}*/
+	}
 }

@@ -1,0 +1,21 @@
+@(users: List[com.harmeetsingh13.entities.User])
+
+@main("All Users"){
+	<h1>All Users</h1>
+	<table class="table table-striped">
+		<thead>
+			<tr>ID</tr>
+			<tr>Name</tr>
+			<tr>Age</tr>
+		</thead>
+		<tbody>
+		@for(user <- users){
+			<tr>
+				<td>@user.id</td>
+				<td>@user.name</td>
+				<td>@user.age</td>
+			</tr>
+		}	
+		</tbody>
+	</table>
+}

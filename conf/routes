@@ -3,6 +3,7 @@
 # ~~~~
 
 # Home page
-GET 	/							controllers.Application.index
+GET 	/find-user					@com.harmeetsingh13.controllers.UserController.findUserById(userId: Integer)
+GET 	/all-users					@com.harmeetsingh13.controllers.UserController.getAllUsers()
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
