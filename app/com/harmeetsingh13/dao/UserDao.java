@@ -14,4 +14,5 @@ import com.harmeetsingh13.entities.User;
 public interface UserDao {
 
 	public List<User> getAllUsers();
+	public boolean addNewUser(User user);
 }

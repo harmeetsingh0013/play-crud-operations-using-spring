@@ -1,0 +1,17 @@
+@(userForm: Form[com.harmeetsingh13.entities.User])
+@import helper._
+@import helper.twitterBootstrap._
+
+@main("New User"){
+	<h1 style="margin-left: 20px;">User Form</h1>
+	@helper.form(action = com.harmeetsingh13.controllers.routes.UserController.saveUser(), 
+			'id -> "userForm", 'style -> "margin-left: 20px;"){
+		<fieldset>
+			<legend>User (@userForm("name").valueOr("New"))</legend>
+			@helper.inputText(userForm("id"), '_label -> "ID")
+			@helper.inputText(userForm("name"), '_label -> "Name")
+			@helper.inputText(userForm("age"), '_label -> "Age")
+		</fieldset>
+		<input type="submit" class="btn btn-primary" value="Save" />
+	}
+}

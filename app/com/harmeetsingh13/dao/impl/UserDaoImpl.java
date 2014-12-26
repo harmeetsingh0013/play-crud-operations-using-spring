@@ -33,4 +33,9 @@ public class UserDaoImpl implements UserDao{
 	public List<User> getAllUsers() {
 		return users;
 	}
+
+	@Override
+	public boolean addNewUser(User user) {
+		return users.add(user);
+	}
 }

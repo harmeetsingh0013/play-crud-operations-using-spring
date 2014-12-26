@@ -3,12 +3,16 @@
  */
 package com.harmeetsingh13.entities;
 
+import play.data.validation.Constraints.Required;
 /**
  * @author Harmeet Singh(Taara)
  *
  */
 public class User {
-
+/**
+ * We can also user javax.validation with play framework. For more information go to below link
+ * https://www.playframework.com/documentation/2.2.x/JavaForms
+ */
 	public int id;
 	public String name;
 	public int age;

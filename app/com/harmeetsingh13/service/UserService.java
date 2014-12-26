@@ -16,4 +16,5 @@ public interface UserService {
 
 	public Optional<User> findUserById(int id);
 	public List<User> getAllUsers();
+	public boolean addNewUser(User user);
 }
