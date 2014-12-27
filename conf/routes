@@ -7,5 +7,11 @@ GET 	/find-user					@com.harmeetsingh13.controllers.UserController.findUserById(
 GET 	/all-users					@com.harmeetsingh13.controllers.UserController.getAllUsers()
 GET 	/add-user					@com.harmeetsingh13.controllers.UserController.newUsers()
 POST 	/add-user					@com.harmeetsingh13.controllers.UserController.saveUser()
+
+GET		/todo-test					@com.harmeetsingh13.controllers.UserController.todoTest()
+GET		/notfound-test				@com.harmeetsingh13.controllers.UserController.notfoundTest()
+GET		/badreq-test				@com.harmeetsingh13.controllers.UserController.badRequestTest()
+
+GET		/cust-exe					@com.harmeetsingh13.controllers.UserController.throwException()
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

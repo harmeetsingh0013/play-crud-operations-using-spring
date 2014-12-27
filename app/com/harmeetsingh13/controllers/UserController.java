@@ -13,11 +13,14 @@ import javax.inject.Singleton;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-
+import play.mvc.With;
 import views.html.user.all_users;
 import views.html.user.add_user;
 
+import com.harmeetsingh13.custannotations.LoggerAnnotation;
 import com.harmeetsingh13.entities.User;
+import com.harmeetsingh13.interceptors.ExceptionInterceptor;
+import com.harmeetsingh13.interceptors.LoggerInterceptor;
 import com.harmeetsingh13.service.UserService;
 
 /**
@@ -41,6 +44,7 @@ public class UserController extends Controller{
 		return null;
 	}
 	
+	@LoggerAnnotation(send=false)
 	public Result newUsers() {
 		return ok(add_user.render(userForm));
 	}
@@ -64,5 +68,22 @@ public class UserController extends Controller{
 	public Result getAllUsers(){
 		List<User> users = userService.getAllUsers();
 		return ok(all_users.render(users));
+	}
+	
+	public Result todoTest() {
+		return TODO;
+	}
+	
+	public Result notfoundTest() {
+		return notFound("The Not Found Test");
+	}
+	
+	public Result badRequestTest() {
+		return badRequest("Bad Request");
+	}
+	
+	@With(value={ExceptionInterceptor.class})
+	public Result throwException() throws Exception{
+		throw new Exception("This is custom Exception ******* ");
 	}
 }

@@ -14,12 +14,13 @@ public class User {
  * https://www.playframework.com/documentation/2.2.x/JavaForms
  */
 	public int id;
+	@Required
 	public String name;
-	public int age;
+	public String age;
 	
 	public User() {}
 	
-	public User(int id, String name, int age){
+	public User(int id, String name, String age){
 		this.id = id;
 		this.name = name;
 		this.age = age;

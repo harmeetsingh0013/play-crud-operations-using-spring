@@ -33,7 +33,7 @@ public class Global extends GlobalSettings{
 		// can be called multiple times. The reason for doing during startup is so that the Play configuration is
 		// entirely available to this application context.
 		logger.info("ON START");
-		applicationContext.scan("com.harmeetsingh13.controllers", "com.harmeetsingh13.service.impl", "com.harmeetsingh13.dao.impl");
+		applicationContext.scan("com.harmeetsingh13");
 		applicationContext.refresh();
 		
 		// This will construct the beans and call any construction lifecycle methods e.g. @PostConstruct
