@@ -3,8 +3,8 @@
  */
 package com.harmeetsingh13.dao.impl;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -18,19 +18,19 @@ import com.harmeetsingh13.entities.User;
  */
 @Singleton
 @Named("userRepo")
-public class UserDaoImpl implements UserDao{
+public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao{
 
-	private List<User> users = new ArrayList<>();
+	private Set<User> users = new HashSet<>();
 	public UserDaoImpl() {
-		users.add(new User(1, "James", "25"));
-		users.add(new User(2, "Micky", "28"));
-		users.add(new User(3, "Gunu", "22"));
-		users.add(new User(4, "Monty", "30"));
-		users.add(new User(5, "Trend", "27"));
+		users.add(new User(1l, "James", "25"));
+		users.add(new User(2l, "Micky", "28"));
+		users.add(new User(3l, "Gunu", "22"));
+		users.add(new User(4l, "Monty", "30"));
+		users.add(new User(5l, "Trend", "27"));
 	}
 	
 	@Override
-	public List<User> getAllUsers() {
+	public Set<User> getAllUsers() {
 		return users;
 	}
 

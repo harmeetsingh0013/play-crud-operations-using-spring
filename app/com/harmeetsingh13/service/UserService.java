@@ -14,7 +14,7 @@ import com.harmeetsingh13.entities.User;
  */
 public interface UserService {
 
-	public Optional<User> findUserById(int id);
+	public Optional<User> findUserById(long id);
 	public List<User> getAllUsers();
 	public boolean addNewUser(User user);
 }

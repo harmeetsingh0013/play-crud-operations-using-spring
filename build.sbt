@@ -9,7 +9,8 @@ libraryDependencies ++= Seq(
   javaEbean,
   cache,
   "org.springframework" % "spring-context" % "4.1.3.RELEASE",
-  "javax.inject" % "javax.inject" % "1" 
+  "javax.inject" % "javax.inject" % "1",
+  "org.projectlombok" % "lombok" % "1.14.8"
 )     
 
 play.Project.playJavaSettings

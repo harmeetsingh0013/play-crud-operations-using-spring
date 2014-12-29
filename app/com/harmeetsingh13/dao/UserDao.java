@@ -3,7 +3,7 @@
  */
 package com.harmeetsingh13.dao;
 
-import java.util.List;
+import java.util.Set;
 
 import com.harmeetsingh13.entities.User;
 
@@ -11,8 +11,8 @@ import com.harmeetsingh13.entities.User;
  * @author Harmeet Singh(Taara)
  *
  */
-public interface UserDao {
+public interface UserDao extends GenericDao<User>{
 
-	public List<User> getAllUsers();
+	public Set<User> getAllUsers();
 	public boolean addNewUser(User user);
 }

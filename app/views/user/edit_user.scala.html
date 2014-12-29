@@ -8,17 +8,9 @@
 			'id -> "userForm", 'style -> "margin-left: 20px;"){
 		<fieldset>
 			<legend>User (@userForm("name").valueOr("New"))</legend>
-			@helper.inputText(userForm("id"), '_label -> "ID")
+			@helper.inputText(userForm("id"), '_label -> "ID", 'readonly -> "readonly")
 			@helper.inputText(userForm("name"), '_label -> "Name")
 			@helper.inputText(userForm("age"), '_label -> "Age")
-			<div class="control-group">
-				<div class="controls">
-					<input name="cars[0].id" value="1" type="checkbox" > BMW <br />
-					<input name="cars[1].id" value="2" type="checkbox" > AUDI<br />
-					<input name="cars[2].id" value="3" type="checkbox" > Merz<br />
-				</div>
-			</div> 
-
 		</fieldset>
 		<input type="submit" class="btn btn-primary" value="Save" />
 	}

@@ -3,6 +3,7 @@
  */
 package com.harmeetsingh13.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,15 +28,14 @@ public class UserServiceImpl implements UserService {
 	private UserDao	userDao;
 		
 	@Override
-	public Optional<User> findUserById(int id) {
-		List<User> users = userDao.getAllUsers();
-		Optional<User> result = users.stream().filter(user -> user.id == id).findFirst();
-		return result;
+	public Optional<User> findUserById(long id) {
+		return userDao.findById(id);
 	}
 
 	@Override
 	public List<User> getAllUsers() {
-		return userDao.getAllUsers();
+		Optional<List<User>> users = userDao.findAll();
+		return users.isPresent()? users.get(): new ArrayList<User>();
 	}
 
 	@Override
