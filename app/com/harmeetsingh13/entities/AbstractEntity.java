@@ -7,8 +7,7 @@ import java.util.Date;
 
 import javax.persistence.MappedSuperclass;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.EqualsAndHashCode;
 import play.data.format.Formats.DateTime;
 import play.db.ebean.Model;
 
@@ -18,15 +17,15 @@ import play.db.ebean.Model;
  */
 @MappedSuperclass
 @SuppressWarnings({ "serial" })
+@EqualsAndHashCode(exclude={"createdDate", "updatedDate", "status"}, callSuper=false)
 public abstract class AbstractEntity extends Model {
 	
-	@Getter @Setter
 	@DateTime(pattern="dd-MM-yyyy")
 	public Date createdDate;
-	@Getter @Setter
+	
 	@DateTime(pattern="dd-MM-yyyy")
 	public Date updatedDate;
-	@Getter @Setter
+	
 	public boolean status;
 	
 }

@@ -12,8 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.ToString;
 import play.data.validation.Constraints.Required;
 /**
  * @author Harmeet Singh(Taara)
@@ -21,15 +20,22 @@ import play.data.validation.Constraints.Required;
  */
 @Entity
 @Table(name="users")
-@EqualsAndHashCode(exclude={"age", "name"}, callSuper=false)
+@ToString(exclude={"role", "department", "car"})
+@EqualsAndHashCode(exclude={"age", "name", "role", "department", "car"}, callSuper=true)
 public class User extends AbstractEntity{
-/**
- * We can also user javax.validation with play framework. For more information go to below link
- * https://www.playframework.com/documentation/2.2.x/JavaForms
- * 
- * For primitive type the playframework automatically fire validations. Still not found any detail, but 
- * why this happen still dont know.
- */
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1277153900011246385L;
+
+	/**
+	 * We can also user javax.validation with play framework. For more information go to below link
+	 * https://www.playframework.com/documentation/2.2.x/JavaForms
+	 * 
+	 * For primitive type the playframework automatically fire validations. Still not found any detail, but 
+	 * why this happen still dont know.
+	 */
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
@@ -98,10 +104,5 @@ public class User extends AbstractEntity{
 	}
 	public void setCar(Car car) {
 		this.car = car;
-	}
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", age=" + age + "]";
 	}
 }

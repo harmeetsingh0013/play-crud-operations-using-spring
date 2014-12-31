@@ -12,12 +12,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 import play.data.format.Formats.DateTime;
 
@@ -25,25 +22,26 @@ import play.data.format.Formats.DateTime;
  * @author james
  *
  */
-@ToString
 @Entity
 @Table(name="cars")
-@EqualsAndHashCode(exclude={"name", "issueDate"}, callSuper=false)
+@ToString(exclude={"users"})
+@EqualsAndHashCode(exclude={"name", "issueDate", "users"}, callSuper=true)
 public class Car extends AbstractEntity{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1245098028447758133L;
+	
 	@Id
-	@Getter @Setter
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@Getter @Setter
 	private String name;
 	
-	@Getter @Setter
 	@DateTime(pattern="dd-MM-yyyy")
 	private Date issueDate;
 	
-	@Getter @Setter
 	@OneToMany(mappedBy="car", fetch=FetchType.LAZY)
 	private List<User> users;
 	
@@ -52,5 +50,30 @@ public class Car extends AbstractEntity{
 		this.id = id;
 		this.name = name;
 		this.issueDate = issueDate;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Date getIssueDate() {
+		return issueDate;
+	}
+	public void setIssueDate(Date issueDate) {
+		this.issueDate = issueDate;
+	}
+	public List<User> getUsers() {
+		return users;
+	}
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 }

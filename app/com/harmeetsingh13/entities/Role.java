@@ -13,18 +13,16 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 /**
  * @author Harmeet Singh(Taara)
  *
  */
-@ToString
 @Entity
 @Table(name="roles")
-@EqualsAndHashCode(callSuper=false, exclude={"name"})
+@ToString(exclude="users")
+@EqualsAndHashCode(callSuper=true, exclude={"name", "users"})
 public class Role extends AbstractEntity{
 
 	/**
@@ -33,14 +31,11 @@ public class Role extends AbstractEntity{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Getter @Setter
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	public Long id;
+	private Long id;
 	
-	@Getter @Setter
-	public String name;
+	private String name;
 	
-	@Getter @Setter
 	@OneToMany(mappedBy="role")
 	private List<User> users;
 	
@@ -48,5 +43,24 @@ public class Role extends AbstractEntity{
 	public Role(long id, String name){
 		this.id = id;
 		this.name = name;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public List<User> getUsers() {
+		return users;
+	}
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 }
