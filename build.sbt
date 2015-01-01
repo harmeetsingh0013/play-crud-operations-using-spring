@@ -2,7 +2,7 @@ name := "play-crud"
 
 version := "1.0-SNAPSHOT"
 
-scalaVersion := "2.10.4"
+scalaVersion := "2.11.4"
 
 libraryDependencies ++= Seq(
   javaJdbc,

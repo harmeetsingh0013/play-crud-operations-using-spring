@@ -13,6 +13,8 @@ import javax.inject.Singleton;
 
 import com.harmeetsingh13.dao.UserDao;
 import com.harmeetsingh13.entities.User;
+import com.harmeetsingh13.exceptions.ObjectNotFound;
+import com.harmeetsingh13.exceptions.ObjectNotPersistInDB;
 import com.harmeetsingh13.service.UserService;
 
 /**
@@ -28,19 +30,33 @@ public class UserServiceImpl implements UserService {
 	private UserDao	userDao;
 		
 	@Override
-	public Optional<User> findUserById(long id) {
-		return userDao.findById(id);
+	public Optional<User> findUserById(long id) throws ObjectNotFound {
+		try{
+			return userDao.findById(id);
+		}catch(Exception ex){
+			throw new ObjectNotFound("Unable to find user", "1003");
+		}
+		
 	}
 
 	@Override
-	public List<User> getAllUsers() {
-		Optional<List<User>> users = userDao.findAll();
-		return users.isPresent()? users.get(): new ArrayList<User>();
+	public List<User> getAllUsers() throws ObjectNotFound {
+		try{
+			Optional<List<User>> users = userDao.findAll();
+			return users.isPresent()? users.get(): new ArrayList<User>();
+		}catch(Exception ex){
+			throw new ObjectNotFound("Unable to find users", "1002");
+		}
+		
 	}
 
 	@Override
-	public boolean addNewUser(User user) {
-		return userDao.addNewUser(user);
+	public void addNewUser(User user) throws ObjectNotPersistInDB {
+		try{
+			userDao.save(user);
+		}catch(Exception ex){
+			throw new ObjectNotPersistInDB("Unable to save user detail", "1001");
+		}
 	}
 
 }

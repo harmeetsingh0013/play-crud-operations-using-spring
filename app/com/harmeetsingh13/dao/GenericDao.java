@@ -12,11 +12,11 @@ import java.util.Optional;
  */
 public interface GenericDao<T> {
 
-	public void save(T object);
-	public void delete(T object);
-	public void update(T object);
-	public Optional<T> findById(long id);
-	public Optional<List<T>> findByProperty(String property, Object value);
-	public Optional<List<T>> findAll();
-	public void batchUpdate(List<T> objects);
+	public void save(T object) throws Exception;
+	public void delete(T object) throws Exception;
+	public void update(T object) throws Exception;
+	public Optional<T> findById(long id)throws Exception; 
+	public Optional<List<T>> findByProperty(String property, Object value) throws Exception;
+	public Optional<List<T>> findAll() throws Exception;
+	public void batchUpdate(List<T> objects) ;
 }

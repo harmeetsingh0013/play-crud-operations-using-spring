@@ -29,32 +29,32 @@ public abstract class GenericDaoImpl<T extends Model> implements GenericDao<T>{
 	}
 	
 	@Override
-	public void save(T object) {
+	public void save(T object) throws Exception{
 		object.save();
 	}
 
 	@Override
-	public void delete(T object) {
+	public void delete(T object) throws Exception{
 		object.delete();
 	}
 
 	@Override
-	public void update(T object) {
+	public void update(T object) throws Exception{
 		object.update();
 	}
 
 	@Override
-	public Optional<T> findById(long id) {
+	public Optional<T> findById(long id) throws Exception{
 		return Optional.of(finder.byId(id));
 	}
 
 	@Override
-	public Optional<List<T>> findByProperty(String property, Object value) {
+	public Optional<List<T>> findByProperty(String property, Object value) throws Exception{
 		return Optional.of(finder.where().eq("property", value).findList());
 	}
 
 	@Override
-	public Optional<List<T>> findAll() {
+	public Optional<List<T>> findAll() throws Exception{
 		return Optional.of(finder.findList());
 	}
 	

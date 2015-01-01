@@ -23,6 +23,8 @@ import views.html.user.all_users;
 import com.harmeetsingh13.custannotations.LoggerAnnotation;
 import com.harmeetsingh13.entities.Role;
 import com.harmeetsingh13.entities.User;
+import com.harmeetsingh13.exceptions.ObjectNotFound;
+import com.harmeetsingh13.exceptions.ObjectNotPersistInDB;
 import com.harmeetsingh13.interceptors.ExceptionInterceptor;
 import com.harmeetsingh13.service.CarService;
 import com.harmeetsingh13.service.UserService;
@@ -44,13 +46,17 @@ public class UserController extends Controller{
 	private static final Form<User> userForm = Form.form(User.class);
 	
 	public Result findUserById(Integer userId) {
-		Optional<User> user = userService.findUserById(userId);
-		if(!user.isPresent()){
-			return notFound("This user not exist in database");
+		try{
+			Optional<User> user = userService.findUserById(userId);
+			if(!user.isPresent()){
+				return notFound("This user not exist in database");
+			}
+			Form<User> filledForm = userForm.fill(user.get());
+			return ok(edit_user.render(filledForm));
+		}catch(ObjectNotFound ex){
+			flash("error", ex.toString());
+			return ok(edit_user.render(userForm));
 		}
-		
-		Form<User> filledForm = userForm.fill(user.get());
-		return ok(edit_user.render(filledForm));
 	}
 	
 	@LoggerAnnotation(send=false)
@@ -67,25 +73,30 @@ public class UserController extends Controller{
 		}
 		User user = userData.get();
 		user.setRole(new Role(CommonEnums.ROLES.USER.getId(), CommonEnums.ROLES.USER.getName()));
-		user.save();
+		try{
+			userService.addNewUser(user);
+			flash("success", String.format("Add user success %s", user));
+		}catch(ObjectNotPersistInDB ex){
+			flash("error", ex.getErrorCode()+"-"+ ex.getMessage());
+		}
+		
 		/*List<Car> cars = user.getCars().stream().map(car -> {
 			Optional<Car> tempCar = carService.findCarById(car.getId());
 			return tempCar.get();
 		}).collect(Collectors.toList());
 		user.setCars(cars);*/
-		boolean result = userService.addNewUser(user);
-		if(result){
-			flash("success", String.format("Add user success %s", user));
-		}else{
-			flash("error", String.format("Fail to save user, Please contact admin %s", user));
-		}
 		return redirect(routes.UserController.getAllUsers());
 	}
 	
 	public Result getAllUsers(){
-		List<User> users = userService.getAllUsers();
+		List<User> users = new ArrayList<>();
+		try{
+			users = userService.getAllUsers();
+		}catch(ObjectNotFound ex){
+			flash("error", ex.getErrorCode()+"-"+ ex.getMessage());
+		}
 		//the template only contain list, not set
-		return ok(all_users.render(new ArrayList<User>(users)));
+		return ok(all_users.render(users));
 	}
 	
 	public Result todoTest() {
