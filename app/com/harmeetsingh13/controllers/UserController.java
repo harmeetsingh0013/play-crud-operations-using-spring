@@ -23,8 +23,10 @@ import views.html.user.all_users;
 import com.harmeetsingh13.custannotations.LoggerAnnotation;
 import com.harmeetsingh13.entities.Role;
 import com.harmeetsingh13.entities.User;
+import com.harmeetsingh13.exceptions.ObjectNotDelete;
 import com.harmeetsingh13.exceptions.ObjectNotFound;
 import com.harmeetsingh13.exceptions.ObjectNotPersistInDB;
+import com.harmeetsingh13.exceptions.ObjectNotUpdated;
 import com.harmeetsingh13.interceptors.ExceptionInterceptor;
 import com.harmeetsingh13.service.CarService;
 import com.harmeetsingh13.service.UserService;
@@ -41,11 +43,13 @@ public class UserController extends Controller{
 	@Inject 
 	@Named("userSerivce")
 	private UserService userService;
+	
 	@Inject @Named("carServiceImpl")
 	private CarService carService;
+	
 	private static final Form<User> userForm = Form.form(User.class);
 	
-	public Result findUserById(Integer userId) {
+	public Result findUserById(long userId) {
 		try{
 			Optional<User> user = userService.findUserById(userId);
 			if(!user.isPresent()){
@@ -59,6 +63,22 @@ public class UserController extends Controller{
 		}
 	}
 	
+	public Result updateUser() {
+		Form<User> userData = userForm.bindFromRequest();
+		if(userData.hasErrors()){
+			flash("error", "Please enter valid values");
+			return badRequest(edit_user.render(userData));
+		}
+		
+		User user = userData.get();
+		try{
+			userService.updateUser(user);
+			flash("success", String.format("Update user success %s", user));
+		}catch(ObjectNotUpdated ex){
+			flash("error", ex.getErrorCode()+"-"+ ex.getMessage());
+		}
+		return redirect(routes.UserController.getAllUsers());
+	}
 	@LoggerAnnotation(send=false)
 	public Result newUsers() {
 		return ok(add_user.render(userForm));
@@ -99,6 +119,18 @@ public class UserController extends Controller{
 		return ok(all_users.render(users));
 	}
 	
+	public Result deleteUser(long userId) {
+		try{
+			userService.deleteUser(userId);
+			flash("success", "User delete Successfully");
+		}catch(ObjectNotDelete ex){
+			flash("error", ex.getErrorCode()+"-"+ ex.getMessage());
+		}
+		return redirect(routes.UserController.getAllUsers());
+	}
+	
+	
+	/* Some different Response Test */
 	public Result todoTest() {
 		return TODO;
 	}

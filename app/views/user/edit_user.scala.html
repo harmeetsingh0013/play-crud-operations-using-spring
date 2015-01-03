@@ -3,8 +3,8 @@
 @import helper.twitterBootstrap._
 
 @main("New User"){
-	<h1 style="margin-left: 20px;">User Form</h1>
-	@helper.form(action = com.harmeetsingh13.controllers.routes.UserController.saveUser(), 
+	<h1>User Form</h1>
+	@helper.form(action = com.harmeetsingh13.controllers.routes.UserController.updateUser(), 
 			'id -> "userForm", 'style -> "margin-left: 20px;"){
 		<fieldset>
 			<legend>User (@userForm("name").valueOr("New"))</legend>

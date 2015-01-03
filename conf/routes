@@ -3,10 +3,12 @@
 # ~~~~
 
 # Home page
-GET 	/find-user					@com.harmeetsingh13.controllers.UserController.findUserById(userId: Integer)
-GET 	/all-users					@com.harmeetsingh13.controllers.UserController.getAllUsers()
+GET		/							@com.harmeetsingh13.controllers.UserController.getAllUsers()
+GET 	/find-user					@com.harmeetsingh13.controllers.UserController.findUserById(userId: Long)
+POST 	/update-user				@com.harmeetsingh13.controllers.UserController.updateUser()
 GET 	/add-user					@com.harmeetsingh13.controllers.UserController.newUsers()
 POST 	/add-user					@com.harmeetsingh13.controllers.UserController.saveUser()
+GET 	/delete-user				@com.harmeetsingh13.controllers.UserController.deleteUser(userId: Long)
 
 GET		/todo-test					@com.harmeetsingh13.controllers.UserController.todoTest()
 GET		/notfound-test				@com.harmeetsingh13.controllers.UserController.notfoundTest()

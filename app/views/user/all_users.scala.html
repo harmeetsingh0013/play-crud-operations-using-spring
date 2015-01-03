@@ -8,6 +8,8 @@
 				<th>ID</th>
 				<th>Name</th>
 				<th>Age</th>
+				<th>Edit</th>
+				<th>Delete</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -16,6 +18,8 @@
 				<td>@user.getId</td>
 				<td>@user.getName</td>
 				<td>@user.getAge</td>
+				<td><a href="@com.harmeetsingh13.controllers.routes.UserController.findUserById(user.getId)" />Edit</a></td>
+				<td><a href="@com.harmeetsingh13.controllers.routes.UserController.deleteUser(user.getId)" /> Delete</a></td>
 			</tr>
 		}	
 		</tbody>
