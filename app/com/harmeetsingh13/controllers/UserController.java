@@ -6,9 +6,8 @@ package com.harmeetsingh13.controllers;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
-import javax.inject.Inject;
+import javax.annotation.Resource;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -16,9 +15,9 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.With;
-import views.html.user.edit_user;
 import views.html.user.add_user;
 import views.html.user.all_users;
+import views.html.user.edit_user;
 
 import com.harmeetsingh13.custannotations.LoggerAnnotation;
 import com.harmeetsingh13.entities.Role;
@@ -40,11 +39,10 @@ import com.harmeetsingh13.utility.CommonEnums;
 @Named("userController")
 public class UserController extends Controller{
 
-	@Inject 
-	@Named("userSerivce")
+	@Resource(name="userSerivce")
 	private UserService userService;
 	
-	@Inject @Named("carServiceImpl")
+	@Resource(name="carServiceImpl")
 	private CarService carService;
 	
 	private static final Form<User> userForm = Form.form(User.class);
@@ -79,6 +77,7 @@ public class UserController extends Controller{
 		}
 		return redirect(routes.UserController.getAllUsers());
 	}
+	
 	@LoggerAnnotation(send=false)
 	public Result newUsers() {
 		return ok(add_user.render(userForm));

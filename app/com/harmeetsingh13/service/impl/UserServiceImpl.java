@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.inject.Inject;
+import javax.annotation.Resource;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -27,8 +27,7 @@ import com.harmeetsingh13.service.UserService;
 @Named("userSerivce")
 public class UserServiceImpl implements UserService {
 
-	@Inject 
-	@Named("userRepo")
+	@Resource(name="userRepo")
 	private UserDao	userDao;
 		
 	@Override

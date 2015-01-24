@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import javax.inject.Inject;
+import javax.annotation.Resource;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -24,7 +24,7 @@ import com.harmeetsingh13.service.CarService;
 @Named("carServiceImpl")
 public class CarServiceImpl implements CarService{
 
-	@Inject @Named("carDaoImpl")
+	@Resource(name="carDaoImpl")
 	private CarDao carDao;
 	
 	@Override
