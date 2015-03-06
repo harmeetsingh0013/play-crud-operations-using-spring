@@ -53,3 +53,5 @@ $ project_dir> play
   -Click on Apply
 2. Run command `play debug run`.
 3. Run debug configurations and add the breakpoints and hit the url.
+ 
+>Note: When importing the project into eclipse and you got the errors in your source code and templates. Please use the following link :  http://stackoverflow.com/questions/28104968/scala-ide-4-0-0-thinks-theres-errors-in-an-out-of-the-box-play-framework-2-3-7
